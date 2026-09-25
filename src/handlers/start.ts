@@ -1,24 +1,10 @@
 import { Composer } from "grammy";
 import type { Ctx } from "../bot.js";
+import { ensureProfile } from "../domain.js";
 import { mainMenuKeyboard } from "../toolkit/index.js";
 
-// The /start handler renders the bot's MAIN MENU — the primary way users operate
-// a button-first bot. A feature adds its own button by calling
-// `registerMainMenuItem(...)` in its own `src/handlers/<slug>.ts`; this handler
-// renders whatever is registered (plus a Help button), so you do NOT edit this
-// file to add a feature. Send ONE message — no placeholder line above the menu.
 const composer = new Composer<Ctx>();
-
-const WELCOME = "👋 Welcome! Tap a button below to get started.";
-
-composer.command("start", async (ctx) => {
-  await ctx.reply(WELCOME, { reply_markup: mainMenuKeyboard() });
-});
-
-// "Back to menu" — re-render the main menu in place from any sub-view.
-composer.callbackQuery("menu:main", async (ctx) => {
-  await ctx.answerCallbackQuery();
-  await ctx.editMessageText(WELCOME, { reply_markup: mainMenuKeyboard() });
-});
-
+const WELCOME = "👋 Welcome! Your watchlist and settings stay private to this chat. Tap a button to track prices and manage alerts.";
+composer.command("start", async (ctx) => { ensureProfile(ctx); const arg = ctx.message?.text?.trim().split(/\s+/)[1]; if (arg) ctx.session.flow = { deepTicker: arg }; await ctx.reply(WELCOME, { reply_markup: mainMenuKeyboard() }); });
+composer.callbackQuery("menu:main", async (ctx) => { await ctx.answerCallbackQuery(); await ctx.editMessageText(WELCOME, { reply_markup: mainMenuKeyboard() }); });
 export default composer;

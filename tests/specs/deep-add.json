@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Start a pre-filled /start flow to add a ticker passed in the deep-link"
+              "text": "I couldn't identify that ticker. Try BTC, ETH, TON, or USDT."
             }
           }
         ],

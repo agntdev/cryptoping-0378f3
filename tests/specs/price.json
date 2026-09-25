@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Get current price(s). Usage: /price BTC or /price mylist"
+              "text": "Usage: /price BTC or /price mylist"
             }
           }
         ],

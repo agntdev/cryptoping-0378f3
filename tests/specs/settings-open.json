@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Open settings for quiet hours, morning summary time, cooldown length, and timezone"
+              "text": "Settings\nQuiet hours: 22:00–07:00\nMorning summary: off\nCooldown: 60 minutes\nTimezone: UTC"
             }
           }
         ],
