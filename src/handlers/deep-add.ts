@@ -1,17 +1,7 @@
 import { Composer } from "grammy";
-
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "Add via deep link (optional)", data: "deep:add" }) if the toolkit exposes it.
-
-const composer = new Composer();
-
-composer.callbackQuery("deep:add", async (ctx) => {
-  await ctx.answerCallbackQuery();
-  await ctx.reply("Start a pre-filled /start flow to add a ticker passed in the deep-link");
-});
-
+import type { Ctx } from "../bot.js";
+import { cleanTicker, coinId } from "../domain.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
+const composer = new Composer<Ctx>();
+composer.callbackQuery("deep:add", async (ctx) => { await ctx.answerCallbackQuery(); const ticker = cleanTicker(ctx.session.flow?.deepTicker ?? ""); if (!ticker || !coinId(ticker)) { await ctx.reply("I couldn't identify that ticker. Try BTC, ETH, TON, or USDT."); return; } await ctx.reply(`Ready to add ${ticker}.`, { reply_markup: inlineKeyboard([[inlineButton("Add coin", "watchlist:quick:" + ticker)], [inlineButton("Back", "menu:main")]]) }); });
 export default composer;

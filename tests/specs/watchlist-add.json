@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Open add-coin menu with quick-add options (BTC, ETH, TON, USDT, Other) and a free-text option"
+              "text": "Choose a coin to add."
             }
           }
         ],

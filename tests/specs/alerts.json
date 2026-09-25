@@ -1,0 +1,13 @@
+[
+  {
+    "name": "alert creation requires a watchlist coin",
+    "steps": [
+      {
+        "send": { "callback": "alert:add:missing" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "That coin is no longer on your watchlist." } }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "guided tour explains the core features",
+    "steps": [
+      {
+        "send": { "callback": "tour:open" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Track coins, add price or percent alerts, and choose when notifications may reach you. Your data stays private to this chat." }
+          }
+        ]
+      }
+    ]
+  }
+]

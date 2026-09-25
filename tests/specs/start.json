@@ -7,7 +7,7 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": { "text": "👋 Welcome! Your watchlist and settings stay private to this chat. Tap a button to track prices and manage alerts." }
           }
         ]
       }
